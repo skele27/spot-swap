@@ -1,65 +1,143 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { FiMapPin, FiShield, FiMessageSquare, FiSearch } from "react-icons/fi";
+
+const features = [
+  {
+    icon: <FiSearch className="text-3xl text-primary" />,
+    title: "Discover Nearby",
+    description:
+      "Browse items being sold in your local area. Filter by category and price!",
+  },
+  {
+    icon: <FiMessageSquare className="text-3xl text-primary" />,
+    title: "Message Sellers",
+    description:
+      "Chat directly with sellers to negotiate a fair price without revealing your personal identity.",
+  },
+  {
+    icon: <FiShield className="text-3xl text-primary" />,
+    title: "Meet Safely",
+    description:
+      "We will suggest safe meeting spots like police stations, libraries, and coffee shops near you.",
+  },
+  {
+    icon: <FiMapPin className="text-3xl text-primary" />,
+    title: "Stay Anonymous",
+    description:
+      "Our mission? Your privacy. We will never ask you for identifying information.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <div>
+      {/* Hero Sec */}
+      <section className="relative bg-gradient-to-br from-gray-900 to-gray-800 py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
+            Buy &amp; Sell Locally.
+            <br />
+            <span className="text-primary">Swap with Confidence.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-6 text-lg text-muted max-w-2xl mx-auto">
+            Spot Swap is a modern, anonymous marketplace for your neighborhood.
+            List items, message sellers, and meet at suggested safe locations 
+            without needing a social media account.
           </p>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/browse"
+              className="px-8 py-3 rounded-xl bg-primary text-white text-lg font-semibold hover:bg-primary-hover transition-colors shadow-lg"
+            >
+              Browse Listings
+            </Link>
+            <Link
+              href="/signup"
+              className="px-8 py-3 rounded-xl border-2 border-primary text-primary text-lg font-semibold hover:bg-gray-800 transition-colors"
+            >
+              Get Started for Free
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 bg-background">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-4">
+            Why Spot Swap?
+          </h2>
+          <p className="text-center text-muted mb-12 max-w-xl mx-auto">
+            A better way to trade simply, safely, and with confidence
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, i) => (
+              <div
+                key={i}
+                className="bg-background rounded-2xl p-6 border border-border hover:shadow-md transition-shadow"
+              >
+                <div className="mb-4">{feature.icon}</div>
+                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                <p className="text-muted text-sm">{feature.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* How It Works Sec */}
+      <section className="py-20 px-4 bg-gradient-to-b from-gray-800 to-gray-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-12">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-primary text-white text-2xl font-bold flex items-center justify-center mb-4">
+                1
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Create an Account</h3>
+              <p className="text-muted text-sm">
+                Sign up in seconds with just an email.
+              </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-primary text-white text-2xl font-bold flex items-center justify-center mb-4">
+                2
+              </div>
+              <h3 className="text-lg font-semibold mb-2">List or Browse</h3>
+              <p className="text-muted text-sm">
+                Post items for sale or browse local listings.
+              </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-primary text-white text-2xl font-bold flex items-center justify-center mb-4">
+                3
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Meet and Swap</h3>
+              <p className="text-muted text-sm">
+                Agree on a price, meet at a safe spot, and swap.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      { }
+      <section className="py-16 px-4 bg-primary">
+        <div className="max-w-3xl mx-auto text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">Ready to start swapping?</h2>
+          <p className="text-blue-100 mb-8">
+            Join Spot Swap today and discover what your neighbors are selling.
+          </p>
+          <Link
+            href="/signup"
+            className="inline-block px-8 py-3 rounded-xl bg-white text-primary font-semibold text-lg hover:bg-gray-800 transition-colors"
+          >
+            Create Your Account
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

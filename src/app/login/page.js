@@ -1,3 +1,6 @@
+/*
+  This page is the login page for the application.
+*/
 "use client";
 
 import { useState } from "react";

@@ -1,3 +1,7 @@
+/*
+  This page is the signup page where users can create an account to use the application.
+*/
+
 "use client";
 
 import { useState } from "react";

@@ -1,3 +1,7 @@
+/*
+  This page is the listing details pages.
+*/
+
 "use client";
 
 import { useEffect, useState } from "react";

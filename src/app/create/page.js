@@ -1,3 +1,7 @@
+/*
+  This page is the page to Create a listing to sell an item.
+*/
+
 "use client";
 
 import { useState } from "react";

@@ -1,3 +1,7 @@
+/*
+  This page is the messages page where users can view and send messages to other users.
+*/
+
 "use client";
 
 import { Suspense, useEffect, useState, useRef } from "react";

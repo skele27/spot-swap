@@ -1,3 +1,6 @@
+/*
+  This page is the API route for fetching safe meeting spots based on a city name using the Google Places API to return safe meeting spots.
+*/
 import { NextResponse } from "next/server";
 
 const SAFE_PLACE_TYPES = [
@@ -20,8 +23,7 @@ export async function GET(request) {
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
 
-  if (!apiKey || apiKey === "your_google_places_api_key") {
-    //fallback mock
+  if (!apiKey || apiKey === "google_places_api_key") {
     return NextResponse.json({
       places: [
         { name: "Local Police Station", address: `Police station in ${city}` },

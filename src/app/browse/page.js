@@ -1,3 +1,7 @@
+/*
+  This page is the Browse page that allows users to browse listings and fetches listings.
+*/
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -40,7 +44,7 @@ export default function BrowsePage() {
     return () => unsubscribe();
   }, []);
 
-  // Filter logic
+  // Here's the filter logic
   useEffect(() => {
     let result = listings;
 
@@ -84,7 +88,7 @@ export default function BrowsePage() {
           />
         </div>
 
-        {/* Category Filter */}
+        {/* Cat Filter */}
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -98,7 +102,7 @@ export default function BrowsePage() {
         </select>
       </div>
 
-      {/* Listings Grid */}
+      {/* Listing Grid */}
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {[...Array(8)].map((_, i) => (

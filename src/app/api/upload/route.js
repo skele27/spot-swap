@@ -1,3 +1,7 @@
+/*
+  This page is the API page to upload images to Cloudinary.
+*/
+
 import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
 

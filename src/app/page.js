@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FiMapPin, FiShield, FiMessageSquare, FiSearch } from "react-icons/fi";
+import { useAuth } from "@/context/AuthContext";
 
 const features = [
   {
@@ -31,6 +32,7 @@ const features = [
 ];
 
 export default function HomePage() {
+  const { user } = useAuth();
   return (
     <div>
       {/* Hero Sec */}
@@ -53,12 +55,14 @@ export default function HomePage() {
             >
               Browse Listings
             </Link>
-            <Link
-              href="/signup"
-              className="px-8 py-3 rounded-xl border-2 border-primary text-primary text-lg font-semibold hover:bg-gray-800 transition-colors"
-            >
-              Get Started for Free
-            </Link>
+            {!user && (
+              <Link
+                href="/signup"
+                className="px-8 py-3 rounded-xl border-2 border-primary text-primary text-lg font-semibold hover:bg-gray-800 transition-colors"
+              >
+                Get Started for Free
+              </Link>
+            )}
           </div>
         </div>
       </section>
@@ -123,21 +127,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      { }
-      <section className="py-16 px-4 bg-primary">
-        <div className="max-w-3xl mx-auto text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Ready to start swapping?</h2>
-          <p className="text-blue-100 mb-8">
-            Join Spot Swap today and discover what your neighbors are selling.
-          </p>
-          <Link
-            href="/signup"
-            className="inline-block px-8 py-3 rounded-xl bg-white text-primary font-semibold text-lg hover:bg-gray-800 transition-colors"
-          >
-            Create Your Account
-          </Link>
-        </div>
-      </section>
+      {!user && (
+        <section className="py-16 px-4 bg-primary">
+          <div className="max-w-3xl mx-auto text-center text-white">
+            <h2 className="text-3xl font-bold mb-4">Ready to start swapping?</h2>
+            <p className="text-blue-100 mb-8">
+              Join Spot Swap today and discover what your neighbors are selling.
+            </p>
+            <Link
+              href="/signup"
+              className="inline-block px-8 py-3 rounded-xl bg-white text-primary font-semibold text-lg hover:bg-gray-800 transition-colors"
+            >
+              Create Your Account
+            </Link>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

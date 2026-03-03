@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import ListingCard from "@/components/ListingCard";
 import { FiSearch } from "react-icons/fi";
 
@@ -18,10 +20,25 @@ const CATEGORIES = [
 ];
 
 export default function BrowsePage() {
-  const [listings] = useState([]);
+  const [listings, setListings] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
+
+  //listener for listings
+  useEffect(() => {
+    const q = query(collection(db, "listings"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setListings(data);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Filter logic
   useEffect(() => {
@@ -81,8 +98,24 @@ export default function BrowsePage() {
         </select>
       </div>
 
-      {/* Empty State Search*/}
-      {filtered.length === 0 ? (
+      {/* Listings Grid */}
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-card-bg rounded-2xl border border-border overflow-hidden animate-pulse"
+            >
+              <div className="aspect-[4/3] bg-gray-700" />
+              <div className="p-4 space-y-3">
+                <div className="h-4 bg-gray-700 rounded w-3/4" />
+                <div className="h-5 bg-gray-700 rounded w-1/4" />
+                <div className="h-3 bg-gray-700 rounded w-1/2" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="text-center py-20">
           <p className="text-muted text-lg">No listings found.</p>
           <p className="text-muted text-sm mt-1">

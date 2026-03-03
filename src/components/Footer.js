@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { FiMapPin } from "react-icons/fi";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Footer() {
+  const { user } = useAuth();
   return (
     <footer className="border-t border-border bg-background mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -17,12 +21,16 @@ export default function Footer() {
             <Link href="/browse" className="hover:text-foreground transition-colors">
               Browse
             </Link>
-            <Link href="/login" className="hover:text-foreground transition-colors">
-              Log In
-            </Link>
-            <Link href="/signup" className="hover:text-foreground transition-colors">
-              Sign Up
-            </Link>
+            {!user && (
+              <>
+                <Link href="/login" className="hover:text-foreground transition-colors">
+                  Log In
+                </Link>
+                <Link href="/signup" className="hover:text-foreground transition-colors">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Copyright */}
